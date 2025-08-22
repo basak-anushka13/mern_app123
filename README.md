@@ -20,7 +20,6 @@ A modern, production-ready MERN stack application for managing agents and distri
 ## 📋 Setup Instructions
 
 ### Prerequisites
-
 - Node.js (v18 or higher)
 - PNPM package manager
 
@@ -28,13 +27,11 @@ A modern, production-ready MERN stack application for managing agents and distri
 
 1. **Clone the repository** (if not already done)
 2. **Install dependencies**:
-
    ```bash
    pnpm install
    ```
 
 3. **Start the development server**:
-
    ```bash
    pnpm dev
    ```
@@ -57,7 +54,6 @@ When uploading CSV files for task distribution, ensure your file contains these 
 - **Notes** (required) - Additional notes or comments
 
 ### Example CSV Format:
-
 ```csv
 FirstName,Phone,Notes
 John,+1234567890,Important client
@@ -68,13 +64,11 @@ Bob,+1234567892,New lead
 ## 🎯 How to Use
 
 ### 1. Login
-
 - Navigate to the homepage
 - Use the demo credentials provided above
 - Click "Sign In" to access the dashboard
 
 ### 2. Manage Agents
-
 - Go to the "Agents" tab
 - View the 5 pre-loaded demo agents
 - Click "Add Agent" to create new agents with:
@@ -84,7 +78,6 @@ Bob,+1234567892,New lead
   - Password
 
 ### 3. Upload and Distribute Lists
-
 - Go to the "Upload & Distribute" tab
 - Select a CSV file (or XLSX/XLS for demo data)
 - The system will automatically:
@@ -94,7 +87,6 @@ Bob,+1234567892,New lead
   - Handle remainder items sequentially
 
 ### 4. View Distributed Lists
-
 - Go to the "Distributed Lists" tab
 - See how tasks are distributed among agents
 - Each agent's assigned items are displayed separately
@@ -102,7 +94,6 @@ Bob,+1234567892,New lead
 ## 🏗️ Architecture
 
 ### Frontend Structure
-
 ```
 client/
 ├── pages/           # React pages (Login, Dashboard)
@@ -112,7 +103,6 @@ client/
 ```
 
 ### Backend Structure
-
 ```
 server/
 ├── routes/         # API route handlers
@@ -123,7 +113,6 @@ server/
 ```
 
 ### Shared Types
-
 ```
 shared/
 └── types.ts       # TypeScript interfaces shared between client/server
@@ -135,7 +124,7 @@ The system distributes tasks using a round-robin approach:
 
 1. **Equal Distribution**: Items are distributed equally among all agents
 2. **Remainder Handling**: If items don't divide evenly, remainder items are distributed sequentially
-3. **Example**:
+3. **Example**: 
    - 23 items ÷ 5 agents = 4 items each + 3 remainder
    - Distribution: Agent1(5), Agent2(5), Agent3(5), Agent4(4), Agent5(4)
 
