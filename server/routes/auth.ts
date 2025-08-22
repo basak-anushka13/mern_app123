@@ -41,7 +41,10 @@ export const handleLogin: RequestHandler = (req, res) => {
     console.log(`Login attempt: ${normalizedEmail}`);
 
     // Validate demo credentials
-    if (normalizedEmail === demoUser.email.toLowerCase() && normalizedPassword === demoPassword) {
+    if (
+      normalizedEmail === demoUser.email.toLowerCase() &&
+      normalizedPassword === demoPassword
+    ) {
       const token = generateToken(demoUser);
 
       const response: LoginResponse = {
@@ -56,7 +59,8 @@ export const handleLogin: RequestHandler = (req, res) => {
     } else {
       const response: LoginResponse = {
         success: false,
-        message: "Invalid email or password. Please use the demo credentials provided.",
+        message:
+          "Invalid email or password. Please use the demo credentials provided.",
       };
 
       console.log(`Login failed for: ${normalizedEmail}`);

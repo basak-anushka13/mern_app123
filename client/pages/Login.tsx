@@ -28,12 +28,12 @@ export default function Login() {
     setIsLoading(true);
 
     // Add a small delay to show loading state
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     try {
       const loginData: LoginRequest = {
         email: email.trim().toLowerCase(),
-        password: password.trim()
+        password: password.trim(),
       };
 
       const response = await fetch("/api/auth/login", {
@@ -61,7 +61,10 @@ export default function Login() {
 
         navigate("/dashboard");
       } else {
-        setError(data.message || "Invalid credentials. Please check your email and password.");
+        setError(
+          data.message ||
+            "Invalid credentials. Please check your email and password.",
+        );
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -207,9 +210,9 @@ export default function Login() {
               <Button
                 type="button"
                 onClick={() => {
-                  setEmail('admin@demo.com');
-                  setPassword('password123');
-                  setError('');
+                  setEmail("admin@demo.com");
+                  setPassword("password123");
+                  setError("");
                 }}
                 variant="outline"
                 className="w-full h-11 border-blue-200 text-blue-600 hover:bg-blue-50"
