@@ -203,6 +203,19 @@ export default function Login() {
               >
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
+
+              <Button
+                type="button"
+                onClick={() => {
+                  setEmail('admin@demo.com');
+                  setPassword('password123');
+                  setError('');
+                }}
+                variant="outline"
+                className="w-full h-11 border-blue-200 text-blue-600 hover:bg-blue-50"
+              >
+                Use Demo Credentials
+              </Button>
             </form>
 
             <div className="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
