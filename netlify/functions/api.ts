@@ -11,5 +11,5 @@ const getApp = () => {
 };
 
 export const handler = serverless(getApp(), {
-  binary: ['image/*', 'application/octet-stream']
+  binary: ["image/*", "application/octet-stream"],
 });
