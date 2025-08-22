@@ -27,8 +27,15 @@ export default function Login() {
     setError("");
     setIsLoading(true);
 
+    // Add a small delay to show loading state
+    await new Promise(resolve => setTimeout(resolve, 300));
+
     try {
-      const loginData: LoginRequest = { email, password };
+      const loginData: LoginRequest = {
+        email: email.trim().toLowerCase(),
+        password: password.trim()
+      };
+
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
@@ -37,17 +44,28 @@ export default function Login() {
         body: JSON.stringify(loginData),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = (await response.json()) as LoginResponse;
 
-      if (data.success && data.token) {
+      if (data.success && data.token && data.user) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
+
+        // Clear form and error before navigation
+        setEmail("");
+        setPassword("");
+        setError("");
+
         navigate("/dashboard");
       } else {
-        setError(data.message || "Login failed");
+        setError(data.message || "Invalid credentials. Please check your email and password.");
       }
     } catch (error) {
-      setError("Network error occurred");
+      console.error("Login error:", error);
+      setError("Unable to connect to server. Please try again.");
     } finally {
       setIsLoading(false);
     }
