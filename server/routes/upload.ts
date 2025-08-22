@@ -211,10 +211,14 @@ export const handleUpload: RequestHandler = async (req, res) => {
 
 export const getLists: RequestHandler = (_req, res) => {
   try {
-    console.log('GET /api/lists - Returning distributed lists:', Object.keys(distributedLists).length, 'agents');
+    console.log(
+      "GET /api/lists - Returning distributed lists:",
+      Object.keys(distributedLists).length,
+      "agents",
+    );
     res.json(distributedLists);
   } catch (error) {
-    console.error('Error in getLists:', error);
-    res.status(500).json({ error: 'Failed to fetch distributed lists' });
+    console.error("Error in getLists:", error);
+    res.status(500).json({ error: "Failed to fetch distributed lists" });
   }
 };
