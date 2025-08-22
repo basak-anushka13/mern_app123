@@ -24,8 +24,8 @@ export default function Login() {
 
   // Clear any existing auth data on component mount
   useEffect(() => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,7 +42,7 @@ export default function Login() {
         password: password.trim(),
       };
 
-      console.log('Attempting login with:', { email: loginData.email });
+      console.log("Attempting login with:", { email: loginData.email });
 
       const response = await fetch("/api/auth/login", {
         method: "POST",
@@ -52,22 +52,31 @@ export default function Login() {
         body: JSON.stringify(loginData),
       });
 
-      console.log('Login response status:', response.status);
+      console.log("Login response status:", response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Login failed with status:', response.status, 'Error:', errorText);
+        console.error(
+          "Login failed with status:",
+          response.status,
+          "Error:",
+          errorText,
+        );
         throw new Error(`Login failed (${response.status}): ${errorText}`);
       }
 
       const data = (await response.json()) as LoginResponse;
-      console.log('Login response data:', { success: data.success, hasToken: !!data.token, hasUser: !!data.user });
+      console.log("Login response data:", {
+        success: data.success,
+        hasToken: !!data.token,
+        hasUser: !!data.user,
+      });
 
       if (data.success && data.token && data.user) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
 
-        console.log('Login successful, navigating to dashboard');
+        console.log("Login successful, navigating to dashboard");
 
         // Clear form and error before navigation
         setEmail("");
@@ -83,10 +92,14 @@ export default function Login() {
       }
     } catch (error) {
       console.error("Login error details:", error);
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        setError("Network connection failed. Please check your internet connection and try again.");
+      if (error instanceof TypeError && error.message.includes("fetch")) {
+        setError(
+          "Network connection failed. Please check your internet connection and try again.",
+        );
       } else {
-        setError(`Connection error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        setError(
+          `Connection error: ${error instanceof Error ? error.message : "Unknown error"}`,
+        );
       }
     } finally {
       setIsLoading(false);
