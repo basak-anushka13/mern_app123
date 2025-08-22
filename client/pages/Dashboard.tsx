@@ -88,20 +88,28 @@ export default function Dashboard() {
   const fetchAgents = async () => {
     try {
       const response = await fetch("/api/agents");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       setAgents(data);
     } catch (error) {
       console.error("Error fetching agents:", error);
+      throw error; // Re-throw to be caught by loadDashboardData
     }
   };
 
   const fetchDistributedLists = async () => {
     try {
       const response = await fetch("/api/lists");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       setDistributedLists(data);
     } catch (error) {
       console.error("Error fetching lists:", error);
+      throw error; // Re-throw to be caught by loadDashboardData
     }
   };
 
