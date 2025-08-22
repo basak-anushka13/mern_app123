@@ -41,7 +41,13 @@ let agents: Agent[] = [
 ];
 
 export const getAgents: RequestHandler = (_req, res) => {
-  res.json(agents);
+  try {
+    console.log('GET /api/agents - Returning agents:', agents.length);
+    res.json(agents);
+  } catch (error) {
+    console.error('Error in getAgents:', error);
+    res.status(500).json({ error: 'Failed to fetch agents' });
+  }
 };
 
 export const createAgent: RequestHandler = (req, res) => {
