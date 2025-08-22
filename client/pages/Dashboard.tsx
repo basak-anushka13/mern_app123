@@ -55,6 +55,8 @@ export default function Dashboard() {
   });
   const [uploadError, setUploadError] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [connectionError, setConnectionError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
