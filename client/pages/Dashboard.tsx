@@ -69,9 +69,21 @@ export default function Dashboard() {
     }
 
     setUser(JSON.parse(userData));
-    fetchAgents();
-    fetchDistributedLists();
+    loadDashboardData();
   }, [navigate]);
+
+  const loadDashboardData = async () => {
+    setIsLoading(true);
+    setConnectionError("");
+
+    try {
+      await Promise.all([fetchAgents(), fetchDistributedLists()]);
+    } catch (error) {
+      setConnectionError("Unable to load dashboard data. Please refresh the page.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const fetchAgents = async () => {
     try {
