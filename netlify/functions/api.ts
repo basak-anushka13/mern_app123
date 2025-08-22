@@ -1,5 +1,15 @@
 import serverless from "serverless-http";
-
 import { createServer } from "../../server";
 
-export const handler = serverless(createServer());
+let app: any;
+
+const getApp = () => {
+  if (!app) {
+    app = createServer();
+  }
+  return app;
+};
+
+export const handler = serverless(getApp(), {
+  binary: ['image/*', 'application/octet-stream']
+});
