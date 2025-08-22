@@ -2,6 +2,9 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { handleLogin } from "./routes/auth";
+import { getAgents, createAgent } from "./routes/agents";
+import { uploadMiddleware, handleUpload, getLists } from "./routes/upload";
 
 export function createServer() {
   const app = express();
@@ -18,6 +21,17 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Authentication routes
+  app.post("/api/auth/login", handleLogin);
+
+  // Agent management routes
+  app.get("/api/agents", getAgents);
+  app.post("/api/agents", createAgent);
+
+  // File upload and distribution routes
+  app.post("/api/upload", uploadMiddleware, handleUpload);
+  app.get("/api/lists", getLists);
 
   return app;
 }
